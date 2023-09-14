@@ -1,0 +1,27 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: 'Pokemon';
+  src: url('./src/assets/fonts/Pokemon-Solid.ttf') format('truetype');
+  font-weight: normal;
+  font-style: solid;
+}
+@font-face {
+  font-family: 'Pokemon';
+  src: url('./src/assets/fonts/Pokemon-Hollow.ttf') format('truetype');
+  font-weight: lighter;
+  font-style: normal;
+}
+
+html,
+body,
+#root,
+.app {
+    height: 100%;
+    width: 100%;
+    font-family: "Montserrat";
+    background-image: url("assets/glouds.gif");
+    background-size: cover;
+}
