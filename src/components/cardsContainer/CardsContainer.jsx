@@ -1,37 +1,42 @@
-import React, { useEffect, useState } from 'react'
-import axios from 'axios'
-import Card from "../Card/Card"
+import React from 'react';
+import InfiniteScroll from 'react-infinite-scroll-component';
 
-import Loader from '../../assets/dragon.gif'
-import usePokemons from '../../hooks/usePokemons'
+import Card from "../Card/Card";
 
-const CardsContainer = () => { 
-    const [verMas, setVerMas] = useState(true);
+import Loader from '../../assets/dragon.gif';
+import usePokemons from '../../hooks/usePokemons';
 
-    const { pokemons, loader, getNextPokemons } = usePokemons();
+const CardsContainer = () => {
+
+    const { pokemons, loader, getNextPokemons, verMas } = usePokemons();
 
     
     
   return (
-    <div className='flex flex-wrap justify-center max-w-[1800px] mt-4 items-center gap-4 '>
-        {loader === true ? 
-            <div className=''>
-                <img src={Loader} width={300} alt="pikachu loader" />
-            </div>
-            : 
-            ""
-        }
-        { pokemons.map((pokemon) => (
-            <Card 
-                pokemon={pokemon} key={pokemon.id} 
-            />
-        )) 
-        }
-        {pokemons.length !== 0 ? 
-            <button onClick={getNextPokemons}>Mostrar Más Pokemones</button> 
-            : ""
-        }
-    </div>
+    <InfiniteScroll
+        dataLength={pokemons.length}
+        next={getNextPokemons}
+        hasMore={verMas}
+        loader={<img src={Loader} width={300} alt="pikachu loader" />}
+        endMessage={<h3>There are no more pokemons to show!</h3>}
+        className='flex flex-wrap justify-center max-w-[1800px] mt-4 items-center gap-4 '
+    >
+        <div className='flex flex-wrap justify-center max-w-[1800px] mt-4 items-center gap-4 '>
+            {loader === true ? 
+                <div className=''>
+                    <img src={Loader} width={300} alt="pikachu loader" />
+                </div>
+                : 
+                ""
+            }
+            { pokemons.map((pokemon) => (
+                <Card 
+                    pokemon={pokemon} key={pokemon.id} 
+                />
+            )) 
+            }
+        </div>
+    </InfiniteScroll>
   )
 }
 

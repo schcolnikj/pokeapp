@@ -7,6 +7,7 @@ const usePokemons = () => {
     const [pokemons, setPokemons] = useState([]);
     const [loader, setLoader] = useState(false);
     const [siguienteUrl, setSiguienteUrl] = useState(URL_DEFAULT);
+    const [verMas, setVerMas] = useState(true);
 
     
     const getSpecieDescription = async (speciesName) => {
@@ -24,7 +25,7 @@ const usePokemons = () => {
     const getAllPokemons = async (url = URL_DEFAULT) => {
         const pokemonStack = [];
     
-        if (pokemons.length === 0) {
+    
             setLoader(true);
             try {
                 const apiData = await axios(url);
@@ -69,8 +70,6 @@ const usePokemons = () => {
                 }
                 }
 
-                setSiguienteUrl(next)
-                setPokemons(...pokemons, pokemonStack)
                 setLoader(false);
                 
                 return { next, pokemonStack}
@@ -80,21 +79,25 @@ const usePokemons = () => {
             }
         }
         
-    };
 
     const getPokemons = async () => {
-        await getAllPokemons(); 
+        const { next, pokemonStack } = await getAllPokemons();
+        setPokemons(pokemonStack);
+        setSiguienteUrl(next)
     }
 
     const getNextPokemons = async () => {
-        await getAllPokemons(siguienteUrl);
+        const { next, pokemonStack } = await getAllPokemons(siguienteUrl);
+        setPokemons(prev => [...prev, ...pokemonStack]);
+        next === null && setVerMas(false);
+        setSiguienteUrl(next);
     }
      
     useEffect(() => {   
         getPokemons();
     }, [])
 
-    return { pokemons, getNextPokemons }
+    return { pokemons, getNextPokemons, verMas }
     
 
 }
