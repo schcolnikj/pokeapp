@@ -28,8 +28,6 @@ const Detail = () => {
         }
     }, [])
 
-    console.log(pokemon);
-
 
   return (
     <div className='w-full bg-white-yellow rounded-xl border-[2px] border-strong-red'>
