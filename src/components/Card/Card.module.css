@@ -43,6 +43,12 @@
     display: none;
    }
    
+   .card:hover .image {
+    opacity: 0;
+    height: 0;
+    display: hidden;
+   }
+
    .card .title {
     font-weight: bold;
     letter-spacing: .1em;
@@ -63,4 +69,15 @@
     color: #FFDE00;
     transition: color 1s;
    }
+
+   .typesList {
+    list-style: none; 
+    padding: 0; 
+    display: flex; 
+    flex-wrap: row;
+    gap: 5px; 
+    align-items: middle;
+    justify-content: center;
+  }
+
    

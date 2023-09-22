@@ -4,7 +4,7 @@ import './App.css'
 
 import NavBar from './components/navbar/NavBar'
 import Home from './views/Home/Home'
-import Detail from './components/Detail/Detail'
+import Detail from './views/Detail/Detail'
 
 function App() {
 
